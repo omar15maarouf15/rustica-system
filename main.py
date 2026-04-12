@@ -1,7 +1,5 @@
 from fastapi import FastAPI, Request, Depends, HTTPException
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-
 from database import engine, SessionLocal
 from database import SessionLocal
 
@@ -22,7 +20,7 @@ from sign_in.auth import hash_password
 
 Base.metadata.create_all(bind=engine)
 app = FastAPI(title="Rustica Restaurant System")
-templates = Jinja2Templates(directory="templates")
+
 
 
 
@@ -1988,15 +1986,36 @@ def edit_categories():
 
 
 
+from fastapi.responses import HTMLResponse
+
 @app.get("/admin", response_class=HTMLResponse)
 def admin_page(request: Request, user=Depends(get_current_user)):
+
     if user["role"] != "admin":
         raise HTTPException(status_code=403)
 
-    return templates.TemplateResponse(
-        "admin.html",
-        {
-            "request": request,
-            "user": user
-        }
-    )
+    return f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+
+<h1>Welcome {user["sub"]} 👑</h1>
+
+<p>هنا تقدر تدير النظام</p>
+
+<hr>
+
+<h3>خيارات:</h3>
+
+<ul>
+    <li><a href="/tables">إدارة الطاولات</a></li>
+    <li><a href="/menu">إدارة المنيو</a></li>
+    <li><a href="/orders">الطلبات</a></li>
+</ul>
+
+</body>
+</html>
+"""
