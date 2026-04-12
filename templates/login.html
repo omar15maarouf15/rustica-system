@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        /* CSS تبعك */
+        .form {
+          --bg-light: #efefef;
+          --bg-dark: #707070;
+          --clr: #58bc82;
+          --clr-alpha: #9c9c9c60;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+          width: 100%;
+          max-width: 300px;
+          margin: 100px auto;
+        }
+
+        .form .input-span {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .form input {
+          border-radius: 0.5rem;
+          padding: 1rem 0.75rem;
+          width: 100%;
+          border: none;
+          background-color: var(--clr-alpha);
+          outline: 2px solid var(--bg-dark);
+        }
+
+        .form input:focus {
+          outline: 2px solid var(--clr);
+        }
+
+        .label {
+          color: var(--clr);
+          font-weight: 600;
+        }
+
+        .submit {
+          padding: 1rem;
+          width: 100%;
+          border-radius: 3rem;
+          background-color: var(--bg-dark);
+          color: white;
+          border: none;
+          cursor: pointer;
+        }
+
+        .submit:hover {
+          background-color: var(--clr);
+          color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+<form class="form" method="post" action="/login">
+    
+    <span class="input-span">
+        <label class="label">Username</label>
+        <input type="text" name="username" required>
+    </span>
+
+    <span class="input-span">
+        <label class="label">Password</label>
+        <input type="password" name="password" required>
+    </span>
+
+    <input class="submit" type="submit" value="Log in">
+
+</form>
+
+</body>
+</html>
